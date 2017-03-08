@@ -18,3 +18,39 @@ Advantages of Hadoop 2.x:
     c.) 2.x Has better scalability. Scalable up to 10000 nodes per cluster.
     d.) Works on concepts of containers. Using containers can run generic tasks.
     e.) Multiple Namenode servers manage multiple namespace.
+
+Difference between MapReduce 1.0 and MapReduce 2.0:
+    Generally MapReduce is a Distributed Data Processing or Batch Processing Programming Model. Like HDFS, MapReduce component also uses 
+Commodity Hardware to process “High Volume of Variety of Data at High Velocity Rate” in a reliable and fault-tolerant manner.
+
+MapReduce 1.0:
+MapReduce 1.x component is divided into two sub-components:
+    1.) Job Tracker
+        * Job Tracker is used to assign MapReduce Tasks to Task Trackers in the Cluster of Nodes. Sometimes, it reassigns same tasks to 
+        other Task Trackers as previous Task Trackers are failed or shutdown scenarios.
+        * Job Tracker maintains all the Task Trackers status like Up/running, Failed, Recovered etc.
+
+    2.) Task Tracker
+        * Task Tracker executes the Tasks which are assigned by Job Tracker and sends the status of those tasks to Job Tracker.
+
+MapReduce 2.0-MAPREDUCE 2/YARN:
+MapReduce 2 component is divided into two sub-components:
+     1.) Job Tracker:
+
+    In MapReduce 2.0, the JobTracker is divided into three services:
+    * ResourceManager, a persistent YARN service that receives and runs applications on the cluster.  A MapReduce job is an application.
+    * JobHistoryServer, to provide information about completed jobs
+    * Application Master, to manage each MapReduce job and is terminated when the job completes.
+
+    2.) Task Tracker:
+        The TaskTracker has been replaced with the NodeManager, a YARN service that manages resources and deployment on a node. NodeManager 
+        is responsible for launching containers that could either be a map or reduce task.
+
+Advantages of MapReduce 2.0:
+    * This new architecture breaks JobTracker model by allowing a new ResourceManager to manage resource usage across applications, with ApplicationMasters 
+taking the responsibility of managing the execution of jobs. 
+    * This change removes a bottleneck and let Hadoop clusters scale up to larger configurations 
+than 4000 nodes. 
+    * This architecture also allows simultaneous execution of a variety of programming models such as graph processing, iterative processing, 
+machine learning, and general cluster computing, including the traditional MapReduce.
+        
